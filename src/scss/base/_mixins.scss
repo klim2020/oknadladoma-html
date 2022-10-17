@@ -1,0 +1,87 @@
+/**
+ * Helper mixins
+*/
+
+// Clearfix
+// http://www.cssmojo.com/latest_new_clearfix_so_far/
+// Other clearfix options: https://github.com/stubbornella/oocss/blob/master/oocss/src/components/utils/_clearfix-me.scss
+@mixin clearfix {
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+// Media queries using bootstrap breakpoints
+@import './node_modules/bootstrap/scss/functions';
+@import './node_modules/bootstrap/scss/variables';
+@import './node_modules/bootstrap/scss/mixins';
+
+
+@mixin bp($point) {
+  @if $point == large {
+    @media (min-width: 1280px) { @content; }
+  } @else if $point == small {
+    @media (max-width: 1279px) { @content; }
+  }
+}
+
+// Text selection
+@mixin text-selection($color-selection, $color-selection-bg) {
+  ::-moz-selection { // sass-lint:disable-line no-vendor-prefixes
+    background: $color-selection-bg;
+    color: $color-selection;
+    text-shadow: none;
+  }
+
+  ::selection {
+    background: $color-selection-bg;
+    color: $color-selection;
+    text-shadow: none;
+  }
+}
+
+//Placeholders
+//Usage:
+//@include placeholder;
+@mixin placeholder {
+  // sass-lint:disable no-vendor-prefixes
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
+
+
+
+
+//Медиа Запросы
+
+@mixin mobile_only(){
+  @include media-breakpoint-down(md){
+    @content;
+  };
+}
+
+@mixin mobile_and_tablet(){
+  @include media-breakpoint-down(lg){
+    @content;
+  };
+}
+
+@mixin tablet_only(){
+  @include media-breakpoint-only(lg){
+    @content;
+  };
+
+}
+
+
+@mixin desktop_only(){
+  @include media-breakpoint-up(lg){
+    @content;
+  }
+}
+
+
